@@ -1,4 +1,4 @@
-# Data_Generation
+# Data Generation for Causal Inference simulations
 Generates synthetic data to apply simulations for causal inference.
 
 The basic model used in this paper is a partially linear regression model extensions: 
