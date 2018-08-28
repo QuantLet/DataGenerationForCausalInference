@@ -1,0 +1,15 @@
+Name of Quantlet: DataGenerationForCausalInference
+
+Published in: Masterthesis 
+
+Description: 
+
+Keywords: 
+
+Author: 
+
+See also:
+
+Submitted: 
+
+Output:
