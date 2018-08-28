@@ -1,15 +1,19 @@
 Name of Quantlet: DataGenerationForCausalInference
 
-Published in: Masterthesis 
+Published in: Masterthesis 'Causal Inference using Machine Learning'
 
-Description: 
+Description: Generates synthetic data to apply simulations for causal inference
 
-Keywords: 
+Keywords: synthetic data, causal inference, simulation, data generation, 
 
-Author: 
+Author: Daniel Jacob
 
-See also:
 
-Submitted: 
+Submitted: 2018/08/24
 
-Output:
+Output: 
+- Partial linear Model
+- Output variable (continuous)
+- Treatment paramter (different options)
+- Treatment assignment (binary)
+- Covariates 
