@@ -3,7 +3,25 @@
 ## [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/qloqo.png" alt="Visit QuantNet">](http://quantlet.de/) **DataGenerationForCausalInference** [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/QN2.png" width="60" alt="Visit QuantNet 2.0">](http://quantlet.de/)
 
 ```yaml
+Name of Quantlet: DataGenerationForCausalInference
 
+Published in: Masterthesis 'Causal Inference using Machine Learning'
+
+Description: Generates synthetic data to apply simulations for causal inference
+
+Keywords: synthetic data, causal inference, simulation, data generation, 
+
+Author: Daniel Jacob
+
+
+Submitted: 2018/08/24
+
+Output: 
+- Partial linear Model
+- Output variable (continuous)
+- Treatment paramter (different options)
+- Treatment assignment (binary)
+- Covariates 
 ```
 
 # Data Generation for Causal Inference Simulations
