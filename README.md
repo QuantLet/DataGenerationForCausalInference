@@ -7,9 +7,9 @@ Name of Quantlet: DataGenerationForCausalInference
 
 Published in: Masterthesis 'Causal Inference using Machine Learning'
 
-Description: Generates synthetic data to apply simulations for causal inference
+Description: Generates synthetic data in form of a partial linear model to apply simulations for causal inference estimation. The parameter of interest is the treatment or uplift effect for a binary treatment assignment. 
 
-Keywords: synthetic data, causal inference, simulation, data generation, 
+Keywords: synthetic data, causal inference, simulation, data generation, partial linear model, treatment effect, uplift, high-dimensional
 
 Author: Daniel Jacob
 
@@ -22,6 +22,7 @@ Output:
 - Treatment paramter (different options)
 - Treatment assignment (binary)
 - Covariates 
+
 ```
 
 # Data Generation for Causal Inference Simulations
