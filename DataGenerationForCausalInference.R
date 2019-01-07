@@ -3,11 +3,11 @@
 
 # Arguments to specify are: 
 
-# N = Number of Observations (real number)
-# k = Number of Covariates (real number)
+# N = Number of observations (real number)
+# k = Number of covariates (real number)
 # random_d = treatment assignment: (Either T for random assignment or F for confounding on X)
 # theta = treatment effect: (Either real number for only one theta, or "binary" {0.1,0.3} or "con" for continuous values (0.1,0.3))
-# var = Size of the Variance (Noise-level)
+# var = Size of the variance (Noise-level)
 
 #Required Packages
 if(!require("clusterGeneration")) install.packages("clusterGeneration"); library("clusterGeneration")
@@ -15,7 +15,7 @@ if(!require("mvtnorm")) install.packages("mvtnorm"); library("mvtnorm")
 
 
 
-datagen <- function(N,k,random_d,theta,var) {
+datagen <- function(N,y,k,random_d,theta,var) {
   
   N = N
   k = k
@@ -63,7 +63,13 @@ datagen <- function(N,k,random_d,theta,var) {
   
   g <- as.vector(cos(z %*% b) ^ 2)
   
-  y <- theta * d + g + rnorm(N, var)
+  if(y=="binary") {
+    y1 <- theta * d + g + pnorm(rnorm(N,0,var))
+    y1.1 <- rbinom(N,prob=pnorm(scale(y1)),size=1)
+    #y1.1 <- (y1 - min(y1)) * (1) / (max(y1) - min(y1)) + 0
+    #y <-  rbinom(N,prob=y1.1,size=1)
+    y <- y1.1
+  } else {y <- y1}
   
   data <- as.data.frame(y)
   data <- cbind(data, theta, d, z)
@@ -74,5 +80,6 @@ datagen <- function(N,k,random_d,theta,var) {
 
 
 ### Example
-test <- datagen(N = 5000, k = 20, random_d = F, theta = "binary", var = 0.25)
-summary(test)
+dataset <- datagen(y="binary",N = 2000, k = 20, random_d = F, theta = "binary", var = 1)
+summary(dataset)
+str(dataset)
