@@ -58,7 +58,7 @@ if(!require("mvtnorm")) install.packages("mvtnorm"); library("mvtnorm")
 
 
 
-datagen <- function(N,k,random_d,theta,var) {
+datagen <- function(N,y,k,random_d,theta,var) {
   
   N = N
   k = k
@@ -75,7 +75,7 @@ datagen <- function(N,k,random_d,theta,var) {
   if (random_d == T) {
     d <- rep(c(0, 1), length.out = N)
   } else {
-    d_prop <- pnorm(z %*% b) # D is dependent on Z
+    d_prop <- pnorm(z %*% b) # D is dependent on Za
     d <- as.numeric(rbinom(N, prob = d_prop, size = 1))
   }
   
@@ -106,7 +106,13 @@ datagen <- function(N,k,random_d,theta,var) {
   
   g <- as.vector(cos(z %*% b) ^ 2)
   
-  y <- theta * d + g + rnorm(N, var)
+  if(y=="binary") {
+    y1 <- theta * d + g + pnorm(rnorm(N,0,var))
+    y1.1 <- rbinom(N,prob=pnorm(scale(y1)),size=1)
+    #y1.1 <- (y1 - min(y1)) * (1) / (max(y1) - min(y1)) + 0
+    #y <-  rbinom(N,prob=y1.1,size=1)
+    y <- y1.1
+  } else {y <- y1}
   
   data <- as.data.frame(y)
   data <- cbind(data, theta, d, z)
@@ -117,7 +123,9 @@ datagen <- function(N,k,random_d,theta,var) {
 
 
 ### Example
-test <- datagen(N = 5000, k = 20, random_d = F, theta = "binary", var = 0.25)
-summary(test)
+dataset <- datagen(y="binary",N = 2000, k = 20, random_d = F, theta = "binary", var = 1)
+summary(dataset)
+str(dataset)
+
 
 ```
