@@ -5,6 +5,7 @@
 
 # N = Number of observations (real number)
 # k = Number of covariates (real number)
+# Y = "binary" for binary output levels, or "1" for continuous level
 # random_d = treatment assignment: (Either T for random assignment or F for confounding on X)
 # theta = treatment effect: (Either real number for only one theta, or "binary" {0.1,0.3} or "con" for continuous values (0.1,0.3))
 # var = Size of the variance (Noise-level)
