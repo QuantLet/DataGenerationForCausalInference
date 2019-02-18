@@ -2,12 +2,11 @@
 # by Daniel Jacob (daniel.jacob@hu-berlin.de) 
 
 # Arguments to specify are: 
-
+# Y = Outcome (dependend variable). Either continuous or binary. 
 # N = Number of observations (real number)
-# k = Number of covariates (real number)
-# Y = "binary" for binary output levels, or "1" for continuous level
+# k = Number of covariates (real number). At least 10 
 # random_d = treatment assignment: (Either T for random assignment or F for confounding on X)
-# theta = treatment effect: (Either real number for only one theta, or "binary" {0.1,0.3} or "con" for continuous values (0.1,0.3))
+# theta = treatment effect: (Either real number for only one theta, or "binary" {0.1,0.3}, "con" for continuous values (0.1,0.3) or "big" for {1,0.4})
 # var = Size of the variance (Noise-level)
 
 #Required Packages
@@ -33,7 +32,7 @@ datagen <- function(N,y,k,random_d,theta,var) {
   if (random_d == T) {
     d <- rep(c(0, 1), length.out = N)
   } else {
-    d_prop <- pnorm(z %*% b) # D is dependent on Z
+    d_prop <- pnorm(z %*% b) # D is dependent on Za
     d <- as.numeric(rbinom(N, prob = d_prop, size = 1))
   }
   
@@ -65,12 +64,10 @@ datagen <- function(N,y,k,random_d,theta,var) {
   g <- as.vector(cos(z %*% b) ^ 2)
   
   if(y=="binary") {
-    y1 <- theta * d + g + pnorm(rnorm(N,0,var))
+    y1 <- theta * d + g 
     y1.1 <- rbinom(N,prob=pnorm(scale(y1)),size=1)
-    #y1.1 <- (y1 - min(y1)) * (1) / (max(y1) - min(y1)) + 0
-    #y <-  rbinom(N,prob=y1.1,size=1)
     y <- y1.1
-  } else {y <- y1}
+  } else {y <- theta * d + g + rnorm(N,0,var)}
   
   data <- as.data.frame(y)
   data <- cbind(data, theta, d, z)
